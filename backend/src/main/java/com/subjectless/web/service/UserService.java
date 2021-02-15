@@ -8,4 +8,5 @@ public interface UserService {
     List<User> getUserList();
     User getByUserId(String userId);
     boolean registerUser(User user);
+    User login(String userId, String password);
 }

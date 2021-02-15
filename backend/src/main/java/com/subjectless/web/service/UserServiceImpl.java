@@ -21,16 +21,19 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getByUserId(String userId) {
-        return userDao.findByUserId();
+        return userDao.findByUserId(userId);
     }
 
     @Override
     public boolean registerUser(User user) {
-        boolean b;
-        User u = userDao.save(user);
-        
-        if(u==null) b=false;
-        else b=true;
-        return b;
+        if(userDao.findByUserId(user.getUserId())!=null) return false;
+
+        userDao.save(user);
+        return true;
+    }
+
+    @Override
+    public User login(String userId, String password) {
+        return userDao.findByUserIdAndPassword(userId, password);
     }
 }
